@@ -1,0 +1,145 @@
+<html>
+
+<head>
+   
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <h2>Registration Form</h2>
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname" required>
+
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname" required>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirmpassword">Confirm Password:</label>
+        <input type="password" id="confirmpassword" name="confirmpassword" required>
+
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="male"> Male
+        <input type="radio" id="female" name="gender" value="female"> Female
+        <input type="radio" id="other" name="gender" value="other"> Other
+
+        <label for="mobnmbr">Mobile Number:</label>
+        <input type="text" id="mobnmbr" name="mobnmbr" required>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="4" required></textarea>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <button type="submit" class="submit-btn">Register</button>
+    </form>
+    </center>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Clear previous error messages
+            let inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.style.borderColor = '#ccc'; // Reset border color
+            });
+
+            // Use an array of validation conditions
+            let validationResults = [
+                // First Name Validation
+                { condition: document.getElementById('fname').value === "", message: "First name is required.", element: 'fname' },
+
+                // Last Name Validation
+                { condition: document.getElementById('lname').value === "", message: "Last name is required.", element: 'lname' },
+
+                // Username Validation
+                { condition: document.getElementById('username').value === "", message: "Username is required.", element: 'username' },
+
+                // Password Validation
+                { condition: document.getElementById('password').value === "", message: "Password is required.", element: 'password' },
+
+                // Confirm Password Validation
+                { condition: document.getElementById('confirmpassword').value !== document.getElementById('password').value, message: "Passwords do not match.", element: 'confirmpassword' },
+
+                // Mobile Number Validation
+                { condition: !/^[0-9]{10}$/.test(document.getElementById('mobnmbr').value), message: "Enter a valid 10-digit mobile number.", element: 'mobnmbr' },
+
+                // Address Validation
+                { condition: document.getElementById('address').value === "", message: "Address is required.", element: 'address' },
+
+                // Email Validation
+                { condition: !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(document.getElementById('email').value), message: "Enter a valid email address.", element: 'email' },
+
+                // Gender Validation
+                { condition: !document.querySelector('input[name="gender"]:checked'), message: "Gender is required.", element: 'gender' }
+            ];
+
+            // Iterate through all validation conditions and apply changes
+            validationResults.forEach(result => {
+                if (result.condition) {
+                    alert(result.message);
+                    document.getElementById(result.element).style.borderColor = 'red';
+                    isValid = false;
+                }
+            });
+
+            return isValid; // Return false to prevent form submission if there are errors
+        }
+    </script>
+
+</body>
+</html>
