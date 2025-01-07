@@ -1,0 +1,47 @@
+<html>
+<head>
+  
+    <title>Change Background Color</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Click the Button to Change Background Color!</h1>
+    <button id="colorButton">Change Color</button>
+
+    <script>
+      
+        const colors = ["#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FF8333", "#33FFF5", "#9B59B6", "#F39C12"];
+        
+        let colorIndex = 0;
+
+       
+        function changeBackgroundColor() {
+            document.body.style.backgroundColor = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.length; 
+        }
+
+       
+        document.getElementById('colorButton').addEventListener('click', changeBackgroundColor);
+    </script>
+
+</body>
+</html>
